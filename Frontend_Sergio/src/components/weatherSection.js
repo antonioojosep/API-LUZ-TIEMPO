@@ -44,12 +44,59 @@ const renderWeatherSection = (container) => {
     searchButton.style.borderRadius = '5px';
     searchButton.style.cursor = 'pointer';
 
+    // Div para mostrar los resultados del clima
+    const resultContainer = document.createElement('div');
+    resultContainer.style.marginTop = '20px';
+    resultContainer.style.textAlign = 'center';
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevenir la recarga de la página
+
+        const city = cityInput.value.trim();
+        if (!city) return; // Si no hay ciudad, no hacemos la búsqueda
+
+        // API Key de OpenWeatherMap (usa tu propia clave si es necesario)
+        const apiKey = 'TU_API_KEY'; // Reemplaza con tu clave de API de OpenWeatherMap
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=es`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data.cod === 200) {
+                // Limpiar los resultados anteriores
+                resultContainer.innerHTML = '';
+
+                const temperature = data.main.temp;
+                const description = data.weather[0].description;
+                const humidity = data.main.humidity;
+                const windSpeed = data.wind.speed;
+
+                // Mostrar los resultados
+                const resultHTML = `
+                    <h3>Clima en ${data.name}, ${data.sys.country}</h3>
+                    <p>Temperatura: ${temperature}°C</p>
+                    <p>Condición: ${description}</p>
+                    <p>Humedad: ${humidity}%</p>
+                    <p>Velocidad del viento: ${windSpeed} m/s</p>
+                `;
+
+                resultContainer.innerHTML = resultHTML;
+            } else {
+                resultContainer.innerHTML = `<p>No se pudo obtener el clima para la ciudad ${city}.</p>`;
+            }
+        } catch (error) {
+            resultContainer.innerHTML = '<p>Error al obtener los datos del clima.</p>';
+        }
+    });
+
     form.appendChild(cityInput);
     form.appendChild(searchButton);
     chartTitleContainer.appendChild(form);
 
     container.appendChild(separator);
     main.appendChild(chartTitleContainer);
+    main.appendChild(resultContainer);
     container.appendChild(main);
 };
 

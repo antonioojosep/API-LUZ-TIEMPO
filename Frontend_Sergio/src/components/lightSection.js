@@ -36,17 +36,37 @@ const renderLightSection = (container) => {
     chart.style.height = '200px';
     chart.style.padding = '20px';
 
-    const data = [100, 150, 200, 180, 90];
-    data.forEach(value => {
-        const bar = document.createElement('div');
-        bar.style.width = '40px';
-        bar.style.height = `${value}px`;
-        bar.style.backgroundColor = '#b33';
-        chart.appendChild(bar);
-    });
+    const fetchData = async () => {
+        try {
+            // API (por ejemplo, para obtener precios de luz o datos relacionados)
+            const response = await fetch('https://api.exmaple.com/data'); // Reemplaza con tu URL de API
+            const data = await response.json();
+
+            // Suponiendo que la API devuelve un arreglo de valores numéricos
+            const dataValues = data.prices || [100, 150, 200, 180, 90]; // Si no hay datos, usamos un arreglo predeterminado
+
+            // Limpiamos el gráfico antes de añadir las nuevas barras
+            chart.innerHTML = '';
+
+            // Generar las barras del gráfico con los datos de la API
+            dataValues.forEach(value => {
+                const bar = document.createElement('div');
+                bar.style.width = '40px';
+                bar.style.height = `${value}px`;
+                bar.style.backgroundColor = '#b33';
+                chart.appendChild(bar);
+            });
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            // Si hay un error, mostrar una barra predeterminada o un mensaje
+            chart.innerHTML = '<p>Error al obtener los datos</p>';
+        }
+    };
+
+    // Llamar a la función para cargar los datos
+    fetchData();
 
     chartContainer.appendChild(chart);
-
     container.appendChild(separator);
     main.appendChild(chartTitleContainer);
     main.appendChild(chartContainer);
