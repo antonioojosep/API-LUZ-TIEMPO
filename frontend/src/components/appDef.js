@@ -152,7 +152,7 @@ showLoginLink.addEventListener('click', (e) => {
 document.getElementById('login').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const email = document.getElementById('login-email').value;
+  const name = document.getElementById('login-email').value;
   const password = document.getElementById('login-password').value;
 
   //mirar el puerto que tiene el localhost pa ponerlo en el fetch <3
@@ -162,17 +162,16 @@ document.getElementById('login').addEventListener('submit', async (e) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ name, password }),
     });
 
     if (response.ok) {
       const data = await response.json();
       alert('Inicio de sesión exitoso');
       console.log('Datos del usuario:', data);
-      // Redirigir al main de sergio una vez se hace login  o descomentar los container remove para que se borren los formularios!!
-    //  window.location.href = 'index.html';
-    // container.remove(loginForm);
-    //container.remove(registerForm);
+      
+    loginForm.remove()
+    registerForm.remove()
     } else {
       const error = await response.json();
       alert(`Error: ${error.message}`);
@@ -187,7 +186,7 @@ document.getElementById('login').addEventListener('submit', async (e) => {
 document.getElementById('register').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const email = document.getElementById('register-email').value;
+  const name = document.getElementById('register-email').value;
   const password = document.getElementById('register-password').value;
   const passwordConfirm = document.getElementById('register-password-confirm').value;
 
@@ -195,16 +194,14 @@ document.getElementById('register').addEventListener('submit', async (e) => {
     alert('Las contraseñas no coinciden');
     return;
   }
-
   try {
     const response = await fetch('http://localhost:3000/api/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ name, password}),
     });
-
     if (response.ok) {
       alert('Registrado correctamente. Por favor, inicie sesión.');
       // Mostrar formulario de login
