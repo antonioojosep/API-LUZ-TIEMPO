@@ -1,5 +1,5 @@
-import { dataPriceDays } from "../helpers/getDataPrice";
-import { createDay, getAllDays, getRangeDays, updatePriceDay } from "../models/day";
+import { dataPriceDays } from "../helpers/getDataPrice.js";
+import { createDay, getAllDays, getRangeDays, updatePriceDay } from "../models/day.js";
 
 export const getRangeDaysHandler = (req, res) => {
     const { start, end } = req.params;

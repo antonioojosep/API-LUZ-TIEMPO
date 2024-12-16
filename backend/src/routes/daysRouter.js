@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllDaysHandler, getRangeDaysHandler, updatePriceDayHandler } from '../controllers/dayController';
+import { getAllDaysHandler, getRangeDaysHandler, updatePriceDayHandler } from '../controllers/dayController.js';
 
 const router = express.Router();
 
