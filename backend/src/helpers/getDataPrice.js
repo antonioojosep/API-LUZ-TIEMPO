@@ -41,22 +41,31 @@ export const getDataPrices = async (url) => {
   
         return sum;
       }, new Map());
-      
-      const arrDays = [];
-        mapDay.forEach((value, key) => {
-          arrDays.push({
-            day:key,
-            price:value
-          })
-        })
-        return arrDays;
+
+      return mapDay;
 
     } catch (error) {
       console.error("Error al calcular los precios diarios:", error);
     }
   };
 
-  export const dataPriceDays = getDataPriceDays(API_URL);
+  export const dataPriceDays = async () => {
+    try {
+        const data = await getDataPriceDays(API_URL);
+        
+
+        const arrDays = [];
+        data.forEach((value, key) => {
+          arrDays.push({
+            day:key,
+            price:value
+          })
+        })
+        return arrDays;
+      } catch (error) {
+        console.error('error', error);
+      }
+}
   
   
   

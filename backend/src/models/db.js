@@ -16,11 +16,13 @@ db.serialize(() => {
         name TEXT NOT NULL,
         password TEXT NOT NULL
     )`);
-    db.run(`CREATE TABLE IF NOT EXISTS day(
+    db.run(`
+        CREATE TABLE IF NOT EXISTS day (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        date INTEGER NOT NULL,
+        day INTEGER NOT NULL,
         price INTEGER NOT NULL
-    )`);
+        )`
+    );
 })
 
 export default db;

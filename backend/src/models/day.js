@@ -1,7 +1,7 @@
 import db from "./db.js";
 
 export const createDay = (day, price, callback) => {
-    const q = 'INSERT INTO day (day, price) VALUES (?,?)';
+    const q = 'INSERT INTO day(day, price) VALUES (?,?)';
     const params = [day, price];
     db.run(q, params, function(err){
         callback(err, {id:this.lastID});
