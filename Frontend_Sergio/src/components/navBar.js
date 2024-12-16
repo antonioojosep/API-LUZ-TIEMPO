@@ -67,19 +67,18 @@ const renderNavBar = (container) => {
     navBar.appendChild(headerDiv);
     container.appendChild(navBar);
 
-    // Eventos de botones
     btnLuz.addEventListener('click', () => {
         const mainContainer = document.getElementById('main-container');
-        mainContainer.innerHTML = ''; // Limpiar solo la sección principal y el footer
-        renderLightSection(mainContainer); // Renderizar sección Luz
-        renderFooter(mainContainer); // Renderizar footer
+        mainContainer.innerHTML = '';
+        renderLightSection(mainContainer);
+        renderFooter(mainContainer);
     });
 
     btnTiempo.addEventListener('click', () => {
         const mainContainer = document.getElementById('main-container');
-        mainContainer.innerHTML = ''; // Limpiar solo la sección principal y el footer
-        renderWeatherSection(mainContainer); // Renderizar sección Tiempo
-        renderFooter(mainContainer); // Renderizar footer
+        mainContainer.innerHTML = '';
+        renderWeatherSection(mainContainer);
+        renderFooter(mainContainer);
     });
 };
 

@@ -1,4 +1,6 @@
+
 const renderLightSection = (container) => {
+    const url = import.meta.env.VITE_API_URL;
     const main = document.createElement('main');
     main.style.backgroundColor = '#d3d3d3';
     main.style.padding = '20px';
@@ -9,7 +11,6 @@ const renderLightSection = (container) => {
     separator.style.border = '1px solid black';
     separator.style.margin = '20px 0';
 
-    // Contenedor para el título
     const chartTitleContainer = document.createElement('div');
     chartTitleContainer.style.backgroundColor = '#d3d3d3';
     chartTitleContainer.style.padding = '10px';
@@ -24,7 +25,6 @@ const renderLightSection = (container) => {
 
     chartTitleContainer.appendChild(chartTitle);
 
-    // Contenedor para el gráfico
     const chartContainer = document.createElement('div');
     chartContainer.style.backgroundColor = '#888';
     chartContainer.style.padding = '30px';
@@ -38,17 +38,13 @@ const renderLightSection = (container) => {
 
     const fetchData = async () => {
         try {
-            // API (por ejemplo, para obtener precios de luz o datos relacionados)
-            const response = await fetch('https://api.exmaple.com/data'); // Reemplaza con tu URL de API
+            const response = await fetch(`${url}/days`);
             const data = await response.json();
-
-            // Suponiendo que la API devuelve un arreglo de valores numéricos
-            const dataValues = data.prices || [100, 150, 200, 180, 90]; // Si no hay datos, usamos un arreglo predeterminado
-
-            // Limpiamos el gráfico antes de añadir las nuevas barras
+    
+            const dataValues = data.map(day => day.price);
+    
             chart.innerHTML = '';
 
-            // Generar las barras del gráfico con los datos de la API
             dataValues.forEach(value => {
                 const bar = document.createElement('div');
                 bar.style.width = '40px';
@@ -58,13 +54,11 @@ const renderLightSection = (container) => {
             });
         } catch (error) {
             console.error("Error fetching data:", error);
-            // Si hay un error, mostrar una barra predeterminada o un mensaje
             chart.innerHTML = '<p>Error al obtener los datos</p>';
         }
     };
-
-    // Llamar a la función para cargar los datos
-    fetchData();
+    
+    fetchData();    
 
     chartContainer.appendChild(chart);
     container.appendChild(separator);
