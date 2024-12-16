@@ -4,12 +4,13 @@
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "test": "node src/server.js"
+    "start": "node backend/src/server.js"
   },
   "author": "Antonio",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "sqlite3": "^5.1.7"
