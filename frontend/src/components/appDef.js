@@ -1,3 +1,4 @@
+export const logear = () =>{
 const app = document.getElementById("app");
 
 // Crear contenedor de formulario de inicio de sesión
@@ -11,7 +12,7 @@ loginTitle.innerText = "Iniciar Sesión";
 loginFormContainer.appendChild(loginTitle);
 
 // Formulario de inicio de sesión
-const loginForm = document.createElement("form");
+let loginForm = document.createElement("form");
 loginForm.id = "login";
 
 // Etiqueta y campo de correo electrónico para el login
@@ -67,7 +68,7 @@ registerTitle.innerText = "Registro";
 registerFormContainer.appendChild(registerTitle);
 
 // Formulario de registro
-const registerForm = document.createElement("form");
+let registerForm = document.createElement("form");
 registerForm.id = "register";
 
 // Etiqueta y campo de correo electrónico para el registro
@@ -129,8 +130,8 @@ registerFormContainer.appendChild(loginLinkParagraph);
 app.appendChild(loginFormContainer);
 app.appendChild(registerFormContainer);
 // Elementos del DOM
-const loginForm = document.getElementById('login-form');
-const registerForm = document.getElementById('register-form');
+ loginForm = document.getElementById('login-form');
+ registerForm = document.getElementById('register-form');
 const showRegisterLink = document.getElementById('show-register');
 const showLoginLink = document.getElementById('show-login');
 
@@ -168,8 +169,10 @@ document.getElementById('login').addEventListener('submit', async (e) => {
       const data = await response.json();
       alert('Inicio de sesión exitoso');
       console.log('Datos del usuario:', data);
-      // Redirigir al main de sergio una vez se hace login mirar eso!!
+      // Redirigir al main de sergio una vez se hace login  o descomentar los container remove para que se borren los formularios!!
     //  window.location.href = 'index.html';
+    // container.remove(loginForm);
+    //container.remove(registerForm);
     } else {
       const error = await response.json();
       alert(`Error: ${error.message}`);
@@ -288,3 +291,4 @@ darkModeButton.addEventListener('click', () => {
   document.body.classList.add('dark-mode');
   document.body.classList.remove('light-mode');
 });
+}
