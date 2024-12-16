@@ -169,7 +169,7 @@ document.getElementById('login').addEventListener('submit', async (e) => {
       const data = await response.json();
       alert('Inicio de sesión exitoso');
       console.log('Datos del usuario:', data);
-      // Redirigir al main de sergio una vez se hace login mirar eso!!
+      // Redirigir al main de sergio una vez se hace login  o descomentar los container remove para que se borren los formularios!!
     //  window.location.href = 'index.html';
     // container.remove(loginForm);
     //container.remove(registerForm);
