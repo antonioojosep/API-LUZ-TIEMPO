@@ -2,6 +2,9 @@ import renderNavBar from "./components/navBar.js";
 import renderLightSection from "./components/lightSection.js";
 import renderWeatherSection from "./components/weatherSection.js";
 import renderFooter from "./components/footer.js";
+import { logear } from "./components/appDef.js";
+
+logear();
 
 const app = document.getElementById('app');
 const container = document.createElement('div');
