@@ -1,4 +1,4 @@
-import db from "./database.js";
+import db from "./db.js";
 
 export const createDay = (day, price, callback) => {
     const q = 'INSERT INTO day (day, price) VALUES (?,?)';
