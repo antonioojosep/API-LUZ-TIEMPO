@@ -1,3 +1,4 @@
+
 const renderWeatherSection = (container) => {
     const main = document.createElement('main');
     main.style.backgroundColor = '#d3d3d3';
@@ -10,7 +11,6 @@ const renderWeatherSection = (container) => {
     separator.style.border = '1px solid black';
     separator.style.margin = '20px 0';
 
-    // Contenedor para el formulario
     const chartTitleContainer = document.createElement('div');
     chartTitleContainer.style.backgroundColor = '#d3d3d3';
     chartTitleContainer.style.padding = '10px';
@@ -22,7 +22,6 @@ const renderWeatherSection = (container) => {
     form.style.alignItems = 'center';
     form.style.gap = '10px';
 
-    // Campo de texto para la ciudad
     const cityInput = document.createElement('input');
     cityInput.type = 'text';
     cityInput.placeholder = 'Ciudad';
@@ -32,7 +31,6 @@ const renderWeatherSection = (container) => {
     cityInput.style.borderRadius = '5px';
     cityInput.style.width = '200px';
 
-    // Botón para buscar
     const searchButton = document.createElement('button');
     searchButton.type = 'submit';
     searchButton.textContent = 'Buscar';
@@ -44,19 +42,18 @@ const renderWeatherSection = (container) => {
     searchButton.style.borderRadius = '5px';
     searchButton.style.cursor = 'pointer';
 
-    // Div para mostrar los resultados del clima
     const resultContainer = document.createElement('div');
     resultContainer.style.marginTop = '20px';
     resultContainer.style.textAlign = 'center';
 
     form.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Prevenir la recarga de la página
+        event.preventDefault();
 
         const city = cityInput.value.trim();
-        if (!city) return; // Si no hay ciudad, no hacemos la búsqueda
+        if (!city) return;
 
-        // API Key de OpenWeatherMap (usa tu propia clave si es necesario)
-        const apiKey = 'TU_API_KEY'; // Reemplaza con tu clave de API de OpenWeatherMap
+        // Falta la API Key de OpenWeatherMap
+        const apiKey = 'KEY';
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=es`;
 
         try {
@@ -64,7 +61,6 @@ const renderWeatherSection = (container) => {
             const data = await response.json();
 
             if (data.cod === 200) {
-                // Limpiar los resultados anteriores
                 resultContainer.innerHTML = '';
 
                 const temperature = data.main.temp;
@@ -72,7 +68,6 @@ const renderWeatherSection = (container) => {
                 const humidity = data.main.humidity;
                 const windSpeed = data.wind.speed;
 
-                // Mostrar los resultados
                 const resultHTML = `
                     <h3>Clima en ${data.name}, ${data.sys.country}</h3>
                     <p>Temperatura: ${temperature}°C</p>
@@ -86,6 +81,7 @@ const renderWeatherSection = (container) => {
                 resultContainer.innerHTML = `<p>No se pudo obtener el clima para la ciudad ${city}.</p>`;
             }
         } catch (error) {
+            console.error("Error fetching weather data:", error);
             resultContainer.innerHTML = '<p>Error al obtener los datos del clima.</p>';
         }
     });
