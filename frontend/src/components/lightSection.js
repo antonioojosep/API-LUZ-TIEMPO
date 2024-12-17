@@ -95,7 +95,7 @@ const renderLightSection = (container) => {
             dataValues.forEach(value => {
                 const bar = document.createElement('div');
                 bar.style.width = '40px';
-                bar.style.height = `${value}px`;
+                bar.style.height = `${value/20}px`;
                 bar.style.backgroundColor = '#b33';
                 chart.appendChild(bar);
             });

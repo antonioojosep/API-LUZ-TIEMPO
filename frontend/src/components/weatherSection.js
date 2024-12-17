@@ -1,5 +1,6 @@
 
 const renderWeatherSection = (container) => {
+    const url = import.meta.env.VITE_API_URL;
     const main = document.createElement('main');
     main.style.backgroundColor = '#d3d3d3';
     main.style.padding = '20px';
@@ -52,12 +53,8 @@ const renderWeatherSection = (container) => {
         const city = cityInput.value.trim();
         if (!city) return;
 
-        // Falta la API Key de OpenWeatherMap
-        const apiKey = 'KEY';
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=es`;
-
         try {
-            const response = await fetch(url);
+            const response = await fetch(`${url}/weather?city=${city}`);
             const data = await response.json();
 
             if (data.cod === 200) {
