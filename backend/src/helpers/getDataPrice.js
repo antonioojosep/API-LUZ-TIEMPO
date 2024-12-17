@@ -75,8 +75,14 @@ export const getDataPrices = async (url) => {
      if (!data || data.length === 0) {
        throw new Error("No hay datos disponibles para esos filtros");
      }
-  
-     return data;
+     const arrDays = [];
+        data.forEach((value, key) => {
+          arrDays.push({
+            day:key,
+            price:value
+          })
+        })
+        return arrDays;
    } catch (error) {
      console.error("Error al obtener datos por filtros:", error);
    }
