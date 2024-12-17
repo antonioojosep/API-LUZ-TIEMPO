@@ -10,7 +10,7 @@ const renderFooter = (container) => {
     separator2.style.margin = '20px 0';
 
     const footerText = document.createElement('div');
-    footerText.textContent = 'Footer con información';
+    footerText.textContent = 'API de Antonio, Sergio y Jesús';
     footerText.style.fontStyle = 'italic';
 
     footer.appendChild(footerText);
