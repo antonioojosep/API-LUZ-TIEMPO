@@ -42,8 +42,6 @@ export const getDataPrices = async (url) => {
         return sum;
       }, new Map());
 
-      return mapDay;
-
     } catch (error) {
       console.error("Error al calcular los precios diarios:", error);
     }
@@ -53,7 +51,6 @@ export const getDataPrices = async (url) => {
     try {
         const data = await getDataPriceDays(API_URL);
         
-
         const arrDays = [];
         data.forEach((value, key) => {
           arrDays.push({
@@ -76,13 +73,27 @@ export const getDataPrices = async (url) => {
        throw new Error("No hay datos disponibles para esos filtros");
      }
      const arrDays = [];
-        data.forEach((value, key) => {
+        data.forEach((item, key) => {
           arrDays.push({
-            day:key,
-            price:value
+            day: key,
+            datetime: item.datetime,
+            price: item.value
           })
         })
-        return arrDays;
+         
+
+        const hourStartInt = parseInt(hourStart, 10);
+        const hourEndInt = parseInt(hourEnd, 10);
+        
+        const filterData = arrDays.filter(({ datetime }) => {
+          const date = new Date(datetime);
+          const hour = date.getHours();
+          const day = date.getDate();
+          return day >= firstDay && day <= lastDay && hour >= hourStartInt && hour<=hourEndInt;
+        })
+
+
+        return filterData;
    } catch (error) {
      console.error("Error al obtener datos por filtros:", error);
    }

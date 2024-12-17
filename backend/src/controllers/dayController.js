@@ -1,16 +1,11 @@
-import { dataPriceDays } from "../helpers/getDataPrice.js";
-import { createDay, getAllDays, getRangeDays, updatePriceDay } from "../models/day.js";
+import { dataPriceDays, getPricesByFilters } from "../helpers/getDataPrice.js";
+import { createDay, getAllDays, updatePriceDay } from "../models/day.js";
 
-export const getRangeDaysHandler = (req, res) => {
+export const getRangeDaysHandler = async (req, res) => {
     const { hourStart, hourEnd, firstDay, lastDay } = req.query;
     
-    getRangeDays(hourStart, hourEnd,firstDay,lastDay, (err, days) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-        } else {
-            res.status(200).json(days);
-        }
-    });
+    const data = await getPricesByFilters(hourStart, hourEnd,firstDay,lastDay);
+    res.json(data);
 }
 
 export const getAllDaysHandler = (req, res) => {
