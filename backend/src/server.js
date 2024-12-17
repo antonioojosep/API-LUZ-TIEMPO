@@ -3,7 +3,7 @@ import express from 'express';
 import { PORT } from './config/config.js';
 import userRouter from './routes/userRouter.js';
 import daysRouter from './routes/daysRouter.js';
-import wheaterRouter from './routes/ wheaterRouter.js';
+import wheaterRouter from './routes/wheaterRouter.js';
 
 const app = express();
 
