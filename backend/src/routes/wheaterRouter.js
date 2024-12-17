@@ -8,3 +8,5 @@ router.get("/", (req, res) => {
     
     getWeather(city);
 })
+
+export default router;
