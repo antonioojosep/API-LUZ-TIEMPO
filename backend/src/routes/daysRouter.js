@@ -4,18 +4,9 @@ import { createDayHandler, createDaysHandler, getAllDaysHandler, getRangeDaysHan
 const router = express.Router();
 
 router.get("/filter?",(req, res) => {
-    const firstDay = req.params.firstDay;
-    const lastDay = req.params.lastDay;
-    const firsHour = req.params.firsHour;
-    const lastHour = req.params.lastHour;
+    const { firstDay, lastDay, firsHour, lastHour } = req.query;
 
-    getRangeDays(firstDay, lastDay, firsHour, lastHour, (err, days) => {
-        if (err) {
-            res.status(500).json({ error: err.message });
-        } else {
-            res.status(200).json(days);
-        }
-    });
+    getRangeDaysHandler(req, res);
  
 });
 
