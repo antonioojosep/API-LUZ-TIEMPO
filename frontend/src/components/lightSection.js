@@ -85,7 +85,10 @@ const renderLightSection = (container) => {
 
     const fetchData = async (day, startTime, endTime) => {
         try {
-            const response = await fetch(`${url}/days?day=${day}&start_time=${startTime}&end_time=${endTime}`);
+            const firstDate = `${day}T${startTime}`;
+            const lastDate = `${day}T${endTime}`;
+
+            const response = await fetch(`${url}/days?firstDate=${firstDate}&lastDate=${lastDate}`);
             const data = await response.json();
     
             const dataValues = data.map(day => day.price);
