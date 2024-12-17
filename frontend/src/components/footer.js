@@ -11,7 +11,6 @@ const renderFooter = (container) => {
 
     const footerText = document.createElement('div');
     footerText.textContent = 'API de Antonio, Sergio y Jesús';
-    footerText.style.fontStyle = 'italic';
 
     footer.appendChild(footerText);
     container.appendChild(separator2);
