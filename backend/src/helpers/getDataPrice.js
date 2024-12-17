@@ -1,4 +1,4 @@
-import { API_URL } from "../config/config.js";
+import { API_URL, OPENWEATHERMAP_API_KEY } from "../config/config.js";
 
 
 export const getDataPrices = async (url) => {
@@ -67,5 +67,35 @@ export const getDataPrices = async (url) => {
       }
 }
   
+ export const getPricesByFilters = async (hourStart, hourEnd, firstDay, lastDay) => {
+   try {
+     const url = `https://apidatos.ree.es/es/datos/mercados/precios-mercados-tiempo-real?start_date=2024-01-${firstDay}T${hourStart}&end_date=2024-01-${lastDay}T${hourEnd}&time_trunc=hour`;
+     const data = await getDataPrices(url);
   
+     if (!data || data.length === 0) {
+       throw new Error("No hay datos disponibles para esos filtros");
+     }
+  
+     return data;
+   } catch (error) {
+     console.error("Error al obtener datos por filtros:", error);
+   }
+ } 
+
+ export const getWeather = async (city) => {
+   try {
+     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${OPENWEATHERMAP_API_KEY}&units=metric`;
+     const response = await fetch(url);
+  
+     if (!response.ok) {
+       throw new Error("Error al obtener datos del clima");
+     }
+  
+     const data = await response.json();
+  
+     return data;
+   } catch (error) {
+     console.error("Error al obtener datos del clima:", error);
+   }
+ }
   

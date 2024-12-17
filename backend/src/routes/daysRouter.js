@@ -3,7 +3,21 @@ import { createDayHandler, createDaysHandler, getAllDaysHandler, getRangeDaysHan
 
 const router = express.Router();
 
-router.get("/start_date=:start/end_date=:end",getRangeDaysHandler);
+router.get("/filter?",(req, res) => {
+    const firstDay = req.params.firstDay;
+    const lastDay = req.params.lastDay;
+    const firsHour = req.params.firsHour;
+    const lastHour = req.params.lastHour;
+
+    getRangeDays(firstDay, lastDay, firsHour, lastHour, (err, days) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+        } else {
+            res.status(200).json(days);
+        }
+    });
+ 
+});
 
 router.get("/",getAllDaysHandler);
 router.get("/create", createDaysHandler);
