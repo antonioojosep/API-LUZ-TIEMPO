@@ -31,7 +31,7 @@ const renderNavBar = (container) => {
     logo.style.height = '100px';
 
     const img = document.createElement('img');
-    img.src = '/img/light-bulb.png';
+    img.src = '../img/light-bulb.png';
     img.alt = 'Logo';
     img.style.maxWidth = '100%';
     img.style.maxHeight = '100%';
