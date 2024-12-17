@@ -29,7 +29,7 @@ export const updatePriceDay = (day, price, callback) => {
     });
 }
 
-export const getRangeDays = (firstDate, lastDate, callback) => {
+export const getRangeDays = (hourStart, hourEnd, firstDate, lastDate, callback) => {
     const q = 'SELECT * FROM day WHERE day >=? AND day <=?';
     const params = [firstDate, lastDate];
     db.all(q, params, function(err, rows) {

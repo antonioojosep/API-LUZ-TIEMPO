@@ -2,9 +2,9 @@ import { dataPriceDays } from "../helpers/getDataPrice.js";
 import { createDay, getAllDays, getRangeDays, updatePriceDay } from "../models/day.js";
 
 export const getRangeDaysHandler = (req, res) => {
-    const { start, end } = req.params;
+    const { hourStart, hourEnd, firstDay, lastDay } = req.query;
     
-    getRangeDays(start, end, (err, days) => {
+    getRangeDays(hourStart, hourEnd,firstDay,lastDay, (err, days) => {
         if (err) {
             res.status(500).json({ error: err.message });
         } else {
