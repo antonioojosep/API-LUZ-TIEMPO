@@ -84,11 +84,11 @@ const renderLightSection = (container) => {
     chart.style.padding = '20px';
 
     const fetchData = async (day, startTime, endTime) => {
-        try {
-            const firstDate = `${day}T${startTime}`;
-            const lastDate = `${day}T${endTime}`;
+            const date = new Date(day).getDate();
+            const urlFinal = `${url}/days/filter?hourStart=${startTime}&hourEnd=${endTime}&firstDate=${date}&lastDate=${date}`;
 
-            const response = await fetch(`${url}/days?firstDate=${firstDate}&lastDate=${lastDate}`);
+        try {
+            const response = await fetch(urlFinal);
             const data = await response.json();
     
             const dataValues = data.map(day => day.price);
@@ -104,7 +104,7 @@ const renderLightSection = (container) => {
             });
         } catch (error) {
             console.error("Error fetching data:", error);
-            chart.innerHTML = '<p>Error al obtener los datos</p>';
+            chart.innerHTML = `<p>Error al obtener los datos:</p>`;
         }
     };
 
